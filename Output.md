@@ -1,6 +1,6 @@
 
 ![Screenshot 2025-02-13 123457](https://github.com/user-attachments/assets/3919abf9-ca02-4b1d-b6e6-eda62faafeac)
-![Screenshot 2025-02-13 122436](https://github.com/user-attachments/assets/e4b48d0f-8299-480a-8aaf-9610efd19cd3)![WhatsApp Image 2025-02-13 at 12 28 17_c9ede9e3](https://github.com/user-attachments/assets/16cb1af3-ed98-4c9c-b8f2-512eeacc9590)
+![Screenshot 2025-02-13 122436](https://github.com/user-attachments/assets/e4b48d0f-8299-480a-8aaf-9610efd19cd3)
 
 ![Screenshot 2025-02-13 122450](https://github.com/user-attachments/assets/5ad949ee-06ff-4074-a49a-16895f8172c7)
 ![Screenshot 2025-02-13 122501](https://github.com/user-attachments/assets/7723024c-c857-485e-b838-15653e49ba68)
