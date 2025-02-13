@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('images/table.jpg'); /* Replace 'background.jpg' with your image path */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      background-color: #f6ebeb;
+    }
+
+    header {
+      background-color: #499daa;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: rgba(184, 171, 175, 0.8);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    form label {
+      display: block;
+      font-weight: bold;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    form input,
+    form select,
+    form button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #1fa0b4;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #499daa;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #9cadf2;
+    }
+
+    #successMessage {
+      text-align: center;
+      color: green;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Book a Table</h1>
+  </header>
+  <div class="container">
+    <h2>Reserve Your Table</h2>
+    <form id="bookingForm">
+      <label for="name">Enter Your Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+
+      <label for="slot">Select Slot</label>
+      <select id="slot" required>
+        <option value="">Select Slot</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+
+      <label for="tableType">Table Type</label>
+      <select id="tableType" required>
+        <option value="">Select Table Type</option>
+        <option value="Standard">Standard</option>
+        <option value="VIP">VIP</option>
+      </select>
+
+      <label for="tableNumber">Table Number</label>
+      <select id="tableNumber" required>
+        <option value="">Select Table Number</option>
+      </select>
+
+      <label for="mobile">Enter Mobile Number</label>
+      <input type="text" id="mobile" placeholder="Mobile Number" required>
+
+      <label for="email">Enter Email ID</label>
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" required>
+
+      <button type="submit">Book Now</button>
+    </form>
+    <p id="successMessage" style="display:none;">Booking successful!</p>
+    
+  </div>
+
+  <script>
+    // Populate table numbers based on table type
+    const tableTypeSelect = document.getElementById('tableType');
+    const tableNumberSelect = document.getElementById('tableNumber');
+
+    tableTypeSelect.addEventListener('change', function () {
+      const tableType = this.value;
+      tableNumberSelect.innerHTML = ''; // Clear existing options
+
+      if (tableType === 'Standard') {
+        for (let i = 1; i <= 5; i++) {
+          const option = document.createElement('option');
+          option.value = `Standard ${i}`;
+          option.textContent = `Standard Table ${i}`;
+          tableNumberSelect.appendChild(option);
+        }
+      } else if (tableType === 'VIP') {
+        for (let i = 1; i <= 10; i++) {
+          const option = document.createElement('option');
+          option.value = `VIP ${i}`;
+          option.textContent = `VIP Table ${i}`;
+          tableNumberSelect.appendChild(option);
+        }
+      } else {
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select Table Number';
+        tableNumberSelect.appendChild(defaultOption);
+      }
+    });
+
+    // Handle form submission
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const slot = document.getElementById('slot').value;
+      const tableType = document.getElementById('tableType').value;
+      const tableNumber = document.getElementById('tableNumber').value;
+      const mobile = document.getElementById('mobile').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      const bookingDetails = {
+        id: 'B' + Date.now(),
+        name,
+        slot,
+        tableType,
+        tableNumber,
+        mobile,
+        email,
+        date,
+        time,
+      };
+
+      // Save booking to localStorage
+      const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      bookings.push(bookingDetails);
+      localStorage.setItem('bookings', JSON.stringify(bookings));
+
+      // Show success message
+      const successMessage = document.getElementById('successMessage');
+      successMessage.textContent = `Booking successful! Booking ID: ${bookingDetails.id}`;
+      successMessage.style.display = 'block';
+
+      // Reset form
+      document.getElementById('bookingForm').reset();
+      tableNumberSelect.innerHTML = '<option value="">Select Table Number</option>';
+    });
+  </script>
+</body>
+</html>

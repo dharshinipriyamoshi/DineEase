@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            text-align: center;
+        }
+
+        header {
+            background: #6a11cb;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .hotel-card h3 {
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+
+        .hotel-card p {
+            margin: 10px;
+            color: #555;
+        }
+
+        .hotel-card form {
+            margin: 10px;
+        }
+
+        .hotel-card select, .hotel-card button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px 0;
+        }
+
+        .hotel-card button {
+            background: #6a11cb;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hotel-card button:hover {
+            background: #2575fc;
+        }
+
+        .option-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .option-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-box button {
+            width: 100%;
+            margin: 10px 0;
+            background: #6a11cb;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .option-box button:hover {
+            background: #2575fc;
+        }
+    </style>
+    <script>
+        function showOptions(hotel, menu) {
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.style.display = 'flex';
+            optionsContainer.dataset.hotel = hotel;
+            optionsContainer.dataset.menu = menu;
+        }
+
+        function handleOption(option) {
+            const optionsContainer = document.getElementById('options-container');
+            const hotel = optionsContainer.dataset.hotel;
+            const menu = optionsContainer.dataset.menu;
+
+            if (option === 'dining') {
+                window.location.href = `booktable.html?hotel=${hotel}&menu=${menu}`;
+            } else if (option === 'takeaway') {
+                window.location.href = `order.html?hotel=${hotel}&menu=${menu}`;
+            }
+        }
+
+        function closeOptions() {
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Select a Hotel and Menu</h1>
+    </header>
+
+    <div class="container">
+        <div class="hotel-grid">
+            <!-- Adding More Hotel Cards -->
+            <div class="hotel-card">
+                <img src="https://www.livechennai.com/images/taj_coromandel_hotel.jpg" alt="Taj Coromandel">
+                <h3>Taj Coromandel</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Taj Coromandel', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrWpYvIK6OUakMxxxd3xSnZvXKXlt3RKZacw&s">
+                <h3>ITC Grand Chola</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('ITC Grand Chola', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/f1/8a/fb/the-leela-palace-chennai.jpg?w=700&h=-1&s=1" alt="The Leela Palace">
+                <h3>The Leela Palace</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('The Leela Palace', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/529051799.jpg?k=18b4d386d831137accdb83487ddc70060fc8ead7762589797d2ce995fb538952&o=&hp=1" alt="Park Hyatt Chennai">
+                <h3>Park Hyatt Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Park Hyatt Chennai', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLKLaHE2DQbKYA7b1lMQOAZ9WQu5LSk247Tw&s" alt="Radisson Blu Hotel">
+                <h3>Radisson Blu Hotel</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Radisson Blu Hotel', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/1f/74/5d/trident-chennai-exterior.jpg?w=700&h=-1&s=1" alt="Trident Chennai">
+                <h3>Trident Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Trident Chennai', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/64/c4/e8/hilton-chennai-facade.jpg?w=700&h=-1&s=1" alt="Hilton Chennai">
+                <h3>Hilton Chennai</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Hilton Chennai', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+            <div class="hotel-card">
+                <img src="https://www.ahstatic.com/photos/6714_ho_00_p_1024x768.jpg" alt="Novotel Chennai OMR">
+                <h3>Novotel Chennai OMR</h3>
+                <p>Veg and Non-Veg</p>
+                <form onsubmit="event.preventDefault(); showOptions('Novotel Chennai OMR', this.menu.value);">
+                    <select name="menu">
+                        <option value="veg">Veg</option>
+                        <option value="nonveg">Non-Veg</option>
+                        <option value="veg & nonveg">Veg & Non-Veg</option>
+                    </select>
+                    <button type="submit">Pre Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="options-container" class="option-container" onclick="closeOptions()">
+        <div class="option-box" onclick="event.stopPropagation();">
+            <h3>Choose an Option</h3>
+            <button onclick="handleOption('dining')">Dining</button>
+            <button onclick="handleOption('takeaway')">Take Away</button>
+            <button onclick="closeOptions()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

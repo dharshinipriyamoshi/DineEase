@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        /* Your styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f1e4;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #payment-amount {
+            font-size: 2em;
+            color: #e1470a;
+            margin: 20px 0;
+        }
+        .pay-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .pay-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Payment Page</h1>
+    <p>Your total is:</p>
+    <div id="payment-amount">₹0</div>
+
+    <button class="pay-button" id="pay-now">Pay Now</button>
+
+    <script>
+        // Get the total amount from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const totalAmount = parseFloat(urlParams.get('totalAmount'));
+
+        if (totalAmount && totalAmount > 0) {
+            // Calculate half of the total amount
+            const amountToPay = totalAmount / 2;
+            document.getElementById('payment-amount').innerText = `₹${amountToPay}`;
+        } else {
+            alert('Invalid or missing total amount!');
+        }
+
+        // Simulate payment process
+        document.getElementById('pay-now').addEventListener('click', function() {
+            alert('Payment processed! Thank you for your purchase.');
+            // Add actual payment logic here if needed
+        });
+    </script>
+</body>
+</html>
+
